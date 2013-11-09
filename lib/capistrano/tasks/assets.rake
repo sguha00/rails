@@ -56,7 +56,7 @@ namespace :deploy do
   after 'deploy:reverted', 'deploy:rollback_assets'
 
   namespace :assets do
-    task :precompile do
+    task :precompile => [:set_rails_env] do
       on roles :web do
         within release_path do
           with rails_env: fetch(:rails_env) do
